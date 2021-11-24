@@ -4,8 +4,9 @@ import { useState, useEffect } from "react";
 import React from "react";
 import ReactDOM from "react-dom";
 
-const Navbar = () => {
-  const [Topics, SetTopics] = useState([]);
+const Navbar = (props) => {
+  // // const [Topics, SetTopics] = useState([]);
+  const { Topics, SetTopics } = props;
 
   useEffect(() => {
     getTopics().then((response) => {
@@ -16,14 +17,14 @@ const Navbar = () => {
   return (
     <span>
       <h2>Topics</h2>
-      <nav className="navabar">
+      <nav className="navbar">
         {Topics.map(({ slug }) => {
           return (
             <div className="span">
               <div className="ul">
                 {" "}
                 <li key={slug}>
-                  <Link to={slug}>{slug}</Link>
+                  <Link to={`/topics/${slug}`}>{slug}</Link>
                 </li>
               </div>
             </div>

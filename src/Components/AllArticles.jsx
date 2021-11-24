@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { getAllArticles } from "../utils/api";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
-const AllArticlesTitles = (props) => {
+import { Link, useParams } from "react-router-dom";
+
+const AllArticles = (props) => {
+  const { topic } = useParams();
   const { SetArticles, Articles } = props;
   useEffect(() => {
-    getAllArticles().then((response) => {
+    getAllArticles(topic).then((response) => {
       SetArticles(response);
     });
-  }, []);
+  }, [topic]);
 
   return (
     <div>
@@ -27,4 +29,4 @@ const AllArticlesTitles = (props) => {
   );
 };
 
-export default AllArticlesTitles;
+export default AllArticles;

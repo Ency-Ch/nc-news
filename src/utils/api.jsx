@@ -10,15 +10,20 @@ export const getTopics = () => {
   });
 };
 
-export const getAllArticles = () => {
-  return newsAPI.get("/articles").then((res) => {
+export const getAllArticles = (topic) => {
+  return newsAPI.get("/articles", { params: { topic: topic } }).then((res) => {
     return res.data.articles;
   });
 };
 
 export const getAnArticle = (article_id) => {
-  console.log("we here");
   return newsAPI.get(`/articles/${article_id}`).then((res) => {
     return res.data.article;
   });
 };
+
+// export const getAnArticleandComments = (article_id) => {
+//   return newsAPI.get(`/articles/${article_id}/comments`).then((res) => {
+//     console.log(res);
+//   });
+// };
