@@ -1,12 +1,17 @@
-import { Link } from "react-router-dom";
-import { getTopics } from "../utils/api";
+import { Link, useLinkClickHandler } from "react-router-dom";
+import {
+  getTopics,
+  getSortedArticles,
+  pickSelectedValueFromRadioButton,
+} from "../utils/api";
 import { useState, useEffect } from "react";
 import React from "react";
 import ReactDOM from "react-dom";
+import AllArticles from "./AllArticles";
+import SortedArticles from "./SortedArticles";
 
 const Navbar = (props) => {
-  // // const [Topics, SetTopics] = useState([]);
-  const { Topics, SetTopics } = props;
+  const { Topics, SetTopics, setQuery, query } = props;
 
   useEffect(() => {
     getTopics().then((response) => {
@@ -15,38 +20,55 @@ const Navbar = (props) => {
   }, []);
 
   return (
-    <span>
-      <h2>Topics</h2>
-      <nav className="navbar">
-        {Topics.map(({ slug }) => {
-          return (
-            <div className="span">
-              <div className="ul">
-                {" "}
-                <li key={slug}>
-                  <Link to={`/topics/${slug}`}>{slug}</Link>
-                </li>
-              </div>
-            </div>
-          );
-        })}
-      </nav>
-    </span>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <h2 className="nav navbar-nav navbar-right">
+        <Link to={"/articles"} element={AllArticles}>
+          HOME
+        </Link>
+      </h2>
+      {Topics.map(({ slug }) => {
+        return (
+          <div className="navbar navbar-expand-lg navbar-light bg-light">
+            <li key={slug} className="nav navbar-nav navbar-right">
+              <Link
+                className="nav navbar-nav navbar-right"
+                to={`/topics/${slug}`}
+              >
+                {slug}
+              </Link>
+            </li>
+          </div>
+        );
+      })}
+      <div class="control">
+        {" "}
+        <form>
+          <label class="radio">
+            <input type="radio" name="answer" value="votes"></input>
+            votes
+          </label>
+          <label class="radio">
+            <input type="radio" name="answer" value="created_at"></input>
+            created_at
+          </label>
+          <label class="radio">
+            <input type="radio" name="answer" value=""></input>
+            default
+          </label>
+          {/* <Link to={`/articles?=${query}`}> */}{" "}
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              let thequery = pickSelectedValueFromRadioButton();
+              setQuery(thequery);
+            }}
+          >
+            click to sort
+          </button>
+        </form>{" "}
+      </div>
+    </nav>
   );
 };
 
 export default Navbar;
-// [
-//   {
-//     slug: "coding",
-//     description: "Code is love, code is life",
-//   },
-//   {
-//     slug: "football",
-//     description: "FOOTIE!",
-//   },
-//   {
-//     slug: "cooking",
-//     description: "Hey good looking, what you got cooking?",
-//   },
-// ];

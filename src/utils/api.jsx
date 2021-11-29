@@ -1,3 +1,4 @@
+import { getSuggestedQuery } from "@testing-library/react";
 import axios from "axios";
 
 const newsAPI = axios.create({
@@ -12,6 +13,12 @@ export const getTopics = () => {
 
 export const getAllArticles = (topic) => {
   return newsAPI.get("/articles", { params: { topic: topic } }).then((res) => {
+    return res.data.articles;
+  });
+};
+
+export const getSortedArticles = (sort_by) => {
+  return newsAPI.get(`/articles?sort_by=${sort_by}`).then((res) => {
     return res.data.articles;
   });
 };
@@ -50,4 +57,19 @@ export const postComment = (article_id, postedComment) => {
     .then((res) => {
       return res;
     });
+};
+export const deleteComment = (comment_id) => {
+  return newsAPI.delete(`/comments/${comment_id}`).then((res) => {
+    return res;
+  });
+};
+
+export const pickSelectedValueFromRadioButton = () => {
+  let ele = document.getElementsByName("answer");
+
+  for (let i = 0; i < ele.length; i++) {
+    if (ele[i].checked) {
+      return ele[i].value;
+    }
+  }
 };

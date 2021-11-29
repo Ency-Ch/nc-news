@@ -4,14 +4,15 @@ import { useEffect, useState } from "react";
 import { getAnArticle, getAnArticleComments, postComment } from "../utils/api";
 import { Link } from "react-router-dom";
 import ArticleVoter from "./ArticleVoter";
-import Comments from "./Comments";
+import Card from "react-bootstrap/Card";
+import Button from "@restart/ui/esm/Button";
+
 const AnArticle = (props) => {
   const { article_id } = useParams();
   const [oneArticle, SetAnArticle] = useState({});
-  const { setCommentsAll, submittedComment } = props;
+  const { setCommentsAll } = props;
   const [votes, setVotes] = useState(0);
-  console.log(submittedComment);
-  console.log("wagwan here ");
+
   useEffect(() => {
     getAnArticle(article_id).then((response) => {
       SetAnArticle(response);
@@ -21,22 +22,33 @@ const AnArticle = (props) => {
       setCommentsAll(response);
     });
   }, [article_id]);
-  // useEffect(() => {
-  //   postComment(article_id, submittedComment);
-  // // }, [submittedComment, article_id]);
-
-  // postComment(article_id, submittedComment);
 
   return (
-    <div>
-      <h3>{oneArticle.title}</h3>
-      <p>{oneArticle.body}</p>
-      <p>
-        Votes {votes} Comments Count {oneArticle.comment_count}
-      </p>
-      <ArticleVoter votes={votes} setVotes={setVotes} article_id={article_id} />
-      <Link to={`/articles/${article_id}/comments`}>Comments</Link>
-    </div>
+    <Card>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm">
+            <div>
+              <Card.Body>
+                <Card.Title>
+                  <h3>{oneArticle.title}</h3>
+                </Card.Title>
+                <p>{oneArticle.body}</p> <p>Votes {votes}</p>{" "}
+                <ArticleVoter
+                  votes={votes}
+                  setVotes={setVotes}
+                  article_id={article_id}
+                />
+                <p> Comments Count {oneArticle.comment_count}</p>
+                <Link to={`/articles/${article_id}/comments`}>
+                  Comments
+                </Link>{" "}
+              </Card.Body>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Card>
   );
 };
 

@@ -13,13 +13,18 @@ function App() {
   const [Articles, SetArticles] = useState([]);
   const [Topics, SetTopics] = useState([]);
   const [AllComments, setCommentsAll] = useState([]);
-  const [submittedComment, setSubmittedComment] = useState("");
-  console.log(submittedComment);
+  const [query, setQuery] = useState("");
+
   return (
     <div className="App">
       <BrowserRouter>
         <Header />
-        <Navbar Topics={Topics} SetTopics={SetTopics} />
+        <Navbar
+          Topics={Topics}
+          SetTopics={SetTopics}
+          query={query}
+          setQuery={setQuery}
+        />
         <SingleUser />
         {/* <Routes>
           <Route path="/topics" element={<Navbar />} />
@@ -31,8 +36,6 @@ function App() {
               <AnArticle
                 AllComments={AllComments}
                 setCommentsAll={setCommentsAll}
-                submittedComment={submittedComment}
-                setSubmittedComment={setSubmittedComment}
               />
             }
           />
@@ -42,8 +45,6 @@ function App() {
               <Comments
                 AllComments={AllComments}
                 setCommentsAll={setCommentsAll}
-                setSubmittedComment={setSubmittedComment}
-                submittedComment={submittedComment}
               />
             }
           />
@@ -51,13 +52,31 @@ function App() {
           <Route
             path="/articles"
             element={
-              <AllArticles Articles={Articles} SetArticles={SetArticles} />
+              <AllArticles
+                Articles={Articles}
+                SetArticles={SetArticles}
+                query={query}
+              />
+            }
+          />
+          <Route
+            path="/articles?=query"
+            element={
+              <AllArticles
+                Articles={Articles}
+                SetArticles={SetArticles}
+                query={query}
+              />
             }
           />
           <Route
             path="/topics/:topic"
             element={
-              <AllArticles Articles={Articles} SetArticles={SetArticles} />
+              <AllArticles
+                Articles={Articles}
+                SetArticles={SetArticles}
+                query={query}
+              />
             }
           />
         </Routes>

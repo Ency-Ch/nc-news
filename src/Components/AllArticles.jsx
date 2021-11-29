@@ -1,24 +1,36 @@
 import React, { useState } from "react";
-import { getAllArticles } from "../utils/api";
+import { getAllArticles, getSortedArticles } from "../utils/api";
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-
+import { FormGroup, ListGroup } from "react-bootstrap";
 const AllArticles = (props) => {
   const { topic } = useParams();
-  const { SetArticles, Articles } = props;
+  const { SetArticles, Articles, query } = props;
+
   useEffect(() => {
-    getAllArticles(topic).then((response) => {
-      SetArticles(response);
-    });
-  }, [topic]);
+    if (query !== "" || query !== null || query !== null) {
+      getSortedArticles(props.query).then((response) => {
+        SetArticles(response);
+      });
+    }
+    if (query === "" || query === null || query !== undefined) {
+      getAllArticles(topic).then((response) => {
+        SetArticles(response);
+      });
+    }
+  }, [query, topic]);
+
+  console.log(query);
 
   return (
     <div>
+      <h1> Articles</h1>
       {Articles.map(({ title, article_id }) => {
         return (
           <div className="span">
             <div className="ul">
               <li key={article_id}>
+                {" "}
                 <Link to={`/articles/${article_id}`}>{title}</Link>
               </li>
             </div>

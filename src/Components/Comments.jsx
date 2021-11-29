@@ -1,27 +1,37 @@
 import { useEffect, useState } from "react";
-import { getAnArticleComments } from "../utils/api";
+import { deleteComment, getAnArticleComments, postComment } from "../utils/api";
 import AnArticle from "./AnArticle";
 import { useParams } from "react-router";
 import React from "react";
+import Card from "react-bootstrap/Card";
 
 const Comments = (props) => {
-  const { AllComments, setSubmittedComment, submittedComment } = props;
-  // const [submitedComment, setSubmittedComment] = useState("");
+  const { article_id } = useParams();
+  const { AllComments } = props;
+  const [submittedComment, setSubmittedComment] = useState("");
   const [newComment, SetNewComment] = useState("");
-  console.log(submittedComment);
-  // console.log(newComment);
+  const [] = useState();
+
+  useEffect(() => {
+    postComment(article_id, submittedComment).then((res) => {
+      console.log(res);
+    });
+  }, [submittedComment, article_id]);
+  const handleDelete = (commentid) => {
+    deleteComment(commentid);
+  };
   return (
     <div>
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          //put newsearch in the search button
           setSubmittedComment(newComment);
           SetNewComment("");
+          //we could have posted it here
         }}
       >
-        <label htmlFor="newcomment">new post</label>
-        <input
+        <label htmlFor="new-comment">new comment</label>
+        <textarea
           type="text"
           id="new-comment"
           onChange={(e) => {
@@ -29,14 +39,27 @@ const Comments = (props) => {
           }}
           value={newComment}
           required
-        />
+        ></textarea>
         <button>Post Comment</button>
       </form>
-
-      <div className="h2">Comments</div>
-      {AllComments.map((comment) => {
-        return <p>{comment.body}</p>;
-      })}
+      <Card>
+        <div class="container">
+          {AllComments.map((comment) => {
+            return (
+              <div>
+                <Card>
+                  <p>Comment by &nbsp;{comment.author}</p>
+                  <p>Comment number&nbsp;&nbsp;{comment.comment_id}</p>
+                  <p>{comment.body}</p>
+                  <button onClick={handleDelete(comment.comment_id)}>
+                    delete
+                  </button>
+                </Card>
+              </div>
+            );
+          })}
+        </div>
+      </Card>
     </div>
   );
 };
