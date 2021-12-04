@@ -1,18 +1,38 @@
-import { increaseVotes } from "../utils/api";
+import { increaseVotes, decreaseVotes } from "../utils/api";
 import React from "react";
 import { useState } from "react";
 
 const ArticleVoter = (props) => {
   const { article_id, setVotes } = props;
-
+  const [counter, setCounter] = useState(0);
+  const [decreaseCounter, setDecreaseCounter] = useState(0);
   const OnclickIncreaseVotes = () => {
-    increaseVotes(article_id, 1).then(() => {
-      setVotes((currentVotes) => {
-        return currentVotes + 1;
+    if (counter === 0) {
+      setCounter(1);
+      increaseVotes(article_id, 1).then(() => {
+        setVotes((currentVotes) => {
+          return currentVotes + 1;
+        });
       });
-    });
+    }
   };
-  return <button onClick={OnclickIncreaseVotes}> Vote </button>;
+
+  const OnclickdecreaseVotes = () => {
+    if (decreaseCounter === 0) {
+      setDecreaseCounter(1);
+      decreaseVotes(article_id, -1).then(() => {
+        setVotes((currentVotes) => {
+          return currentVotes - 1;
+        });
+      });
+    }
+  };
+  return (
+    <div>
+      <button onClick={OnclickIncreaseVotes}> Up Vote </button>
+      <button onClick={OnclickdecreaseVotes}> Down Votes </button>
+    </div>
+  );
 };
 
 export default ArticleVoter;

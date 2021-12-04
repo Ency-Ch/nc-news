@@ -5,7 +5,7 @@ import { getAnArticle, getAnArticleComments, postComment } from "../utils/api";
 import { Link } from "react-router-dom";
 import ArticleVoter from "./ArticleVoter";
 import Card from "react-bootstrap/Card";
-import Button from "@restart/ui/esm/Button";
+// import Button from "@restart/ui/esm/Button";
 
 const AnArticle = (props) => {
   const { article_id } = useParams();
@@ -17,9 +17,6 @@ const AnArticle = (props) => {
     getAnArticle(article_id).then((response) => {
       SetAnArticle(response);
       setVotes(response.votes);
-    });
-    getAnArticleComments(article_id).then((response) => {
-      setCommentsAll(response);
     });
   }, [article_id]);
 

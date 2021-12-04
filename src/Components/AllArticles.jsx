@@ -8,19 +8,22 @@ const AllArticles = (props) => {
   const { SetArticles, Articles, query } = props;
 
   useEffect(() => {
-    if (query !== "" || query !== null || query !== null) {
-      getSortedArticles(props.query).then((response) => {
+    console.log(query);
+    if (query !== "" || query !== null || query !== undefined) {
+      getSortedArticles(query).then((response) => {
         SetArticles(response);
+        console.log(Articles, query, "articles");
       });
     }
+  }, [query]);
+
+  useEffect(() => {
     if (query === "" || query === null || query !== undefined) {
       getAllArticles(topic).then((response) => {
         SetArticles(response);
       });
     }
-  }, [query, topic]);
-
-  console.log(query);
+  }, [topic]);
 
   return (
     <div>
@@ -30,7 +33,6 @@ const AllArticles = (props) => {
           <div className="span">
             <div className="ul">
               <li key={article_id}>
-                {" "}
                 <Link to={`/articles/${article_id}`}>{title}</Link>
               </li>
             </div>
