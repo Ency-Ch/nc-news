@@ -8,6 +8,7 @@ import Comments from "./Components/Comments";
 import React from "react";
 import { useState } from "react";
 import SingleUser from "./Components/SingleUser";
+import SortArticles from "./Components/SortArticles";
 
 function App() {
   const [Articles, SetArticles] = useState([]);
@@ -19,16 +20,9 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Header />
-        <Navbar
-          Topics={Topics}
-          SetTopics={SetTopics}
-          query={query}
-          setQuery={setQuery}
-        />
+        <Navbar Topics={Topics} SetTopics={SetTopics} query={query} />
         <SingleUser />
-        {/* <Routes>
-          <Route path="/topics" element={<Navbar />} />
-        </Routes> */}
+        <SortArticles setQuery={setQuery} />
         <Routes>
           <Route
             path="/articles/:article_id"
@@ -48,7 +42,7 @@ function App() {
               />
             }
           />
-          {/* <Route path="/comments/:comment_id" /> */}
+          <Route path="/comments/:comment_id" />
           <Route
             path="/articles"
             element={
@@ -56,6 +50,7 @@ function App() {
                 Articles={Articles}
                 SetArticles={SetArticles}
                 query={query}
+                setQuery={setQuery}
               />
             }
           />

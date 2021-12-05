@@ -16,6 +16,6 @@
     transform: rotate(360deg);
   }
 }
-
-.deleteButton {
+li {
+  list-style-type: none;
 }

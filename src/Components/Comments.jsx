@@ -1,8 +1,5 @@
 import { useEffect, useState } from "react";
-import CommentVoter from "./CommentVoter";
 import { deleteComment, getAnArticleComments, postComment } from "../utils/api";
-import ArticleVoter from "./ArticleVoter";
-import AnArticle from "./AnArticle";
 import { useParams } from "react-router";
 import React from "react";
 import Card from "react-bootstrap/Card";
@@ -13,7 +10,6 @@ const Comments = (props) => {
   const [submittedComment, setSubmittedComment] = useState("");
   const [newComment, SetNewComment] = useState("");
   const [getComments, setGetComments] = useState(false);
-  const [commentVotes, setCommentVotes] = useState(0);
 
   useEffect(() => {
     if (submittedComment === "") {
@@ -29,7 +25,7 @@ const Comments = (props) => {
 
   useEffect(() => {
     getAnArticleComments(article_id).then((response) => {
-      console.log(response);
+      // console.log(response);
       setCommentsAll(response);
     });
   }, []);
@@ -57,7 +53,10 @@ const Comments = (props) => {
           //we could have posted it here
         }}
       >
-        <label htmlFor="new-comment">new comment</label>
+        <ul></ul>
+        <h2>new comment</h2>
+        <label htmlFor="new-comment"></label>
+
         <textarea
           type="text"
           id="new-comment"
@@ -67,41 +66,38 @@ const Comments = (props) => {
           }}
           value={newComment}
           required
+          className="mt-0 text-center "
         ></textarea>
-        <button>Post Comment</button>
+        <li>
+          <button className="btn btn-primary">Post Comment</button>
+        </li>
       </form>
       <Card>
         <div class="container">
           {AllComments.map((comment) => {
             if (comment.author === "jessjelly") {
-              console.log(comment.comment_id);
               return (
                 <div>
-                  <Card key={comment.comment_id}>
-                    {/* {setCommentVotes(comment.votes)} */}
-                    <p>Comment by &nbsp;{comment.author}</p>
-                    <p>{comment.body}</p>
-                    <p> comment votes{commentVotes}</p>
-                    <p>comment id {comment.comment_id}</p>
-
-                    <CommentVoter
-                      setCommentVotes={setCommentVotes}
-                      commentVotes={commentVotes}
-                      individualComment_id={comment.comment_id}
-                      getComments={getComments}
-                      setGetComments={setGetComments}
-                    />
-                    <button
-                      onClick={() => {
-                        // wait for delete to finish then run removeItem
-                        deleteComment(comment.comment_id).then(() => {
-                          removeItem();
-                        });
-                      }}
-                      id="deleteButton"
-                    >
-                      delete
-                    </button>
+                  <Card>
+                    <li className="" key={comment.comment_id}>
+                      {/* {setCommentVotes(comment.votes)} */}
+                      <p>Comment by &nbsp;{comment.author}</p>
+                      <p>{comment.body}</p>
+                      {/* <p> comment votes{commentVotes}</p> */}
+                      <p>comment id {comment.comment_id}</p>
+                      <button
+                        onClick={() => {
+                          // wait for delete to finish then run removeItem
+                          deleteComment(comment.comment_id).then(() => {
+                            removeItem();
+                          });
+                        }}
+                        id="deleteButton"
+                        className="btn btn btn-danger"
+                      >
+                        delete
+                      </button>
+                    </li>
                   </Card>
                 </div>
               );
@@ -109,17 +105,9 @@ const Comments = (props) => {
             return (
               <div key={comment.comment_id}>
                 <Card>
-                  {console.log(comment.comment_id)}
                   <p>Comment by &nbsp;{comment.author}</p>
                   <p>{comment.body}</p>
                   <p> comment votes{comment.votes}</p>
-                  <CommentVoter
-                  //   setCommentVotes={setCommentVotes}
-                  //   commentVotes={commentVotes}
-                  //   individualComment_id={comment.comment_id}
-                  //   getComments={getComments}
-                  //   setGetComments={setGetComments}
-                  />
                 </Card>
               </div>
             );

@@ -29,8 +29,23 @@ const ArticleVoter = (props) => {
   };
   return (
     <div>
-      <button onClick={OnclickIncreaseVotes}> Up Vote </button>
-      <button onClick={OnclickdecreaseVotes}> Down Votes </button>
+      <button
+        type="button"
+        className="btn btn-primary"
+        onClick={OnclickIncreaseVotes}
+      >
+        {" "}
+        Up Vote{" "}
+      </button>
+
+      <button
+        type="button"
+        className="btn btn-danger"
+        onClick={OnclickdecreaseVotes}
+      >
+        {" "}
+        Down Votes{" "}
+      </button>
     </div>
   );
 };

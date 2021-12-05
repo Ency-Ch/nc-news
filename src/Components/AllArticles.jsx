@@ -3,9 +3,10 @@ import { getAllArticles, getSortedArticles } from "../utils/api";
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { FormGroup, ListGroup } from "react-bootstrap";
+import SortArticles from "./SortArticles";
 const AllArticles = (props) => {
   const { topic } = useParams();
-  const { SetArticles, Articles, query } = props;
+  const { SetArticles, Articles, query, setQuery } = props;
 
   useEffect(() => {
     console.log(query);
