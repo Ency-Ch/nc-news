@@ -40,7 +40,7 @@ Good work, Ency. I know you have worked really hard to make progress on this pro
 ### Individual Article / Comments
 
 - [✅] Individual articles are served with comments
-- [✅] Can vote on comments
+- [] Can vote on comments
 - [✅ ] Can vote a maximum of once in either direction per page load
 - [✅] Votes are persistent when page is refreshed
 - [✅] Can post new comments, which are persistent
@@ -60,8 +60,8 @@ Good work, Ency. I know you have worked really hard to make progress on this pro
 ## Error Handling
 
 - [ ] Bad url
-- [ ] Bad topic slug in url
-- [ ] Bad article id in url
+- [✅ ] Bad topic slug in url
+- [ ✅] Bad article id in url
 - [✅] Post comment: (No text in comment body / Can you post without logging in?)
 
 ## Code
