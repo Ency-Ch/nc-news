@@ -1,41 +1,49 @@
-import { Link, useLinkClickHandler } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { getTopics } from "../utils/api";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import React from "react";
-import ReactDOM from "react-dom";
+
 import AllArticles from "./AllArticles";
+import WelcomePage from "./WelcomePage";
 
 const Navbar = (props) => {
-  const { Topics, SetTopics, setQuery, query } = props;
+  const { Topics, SetTopics } = props;
 
   useEffect(() => {
     getTopics().then((response) => {
       SetTopics(response);
     });
-  }, []);
+  }, [SetTopics]);
 
   return (
-    <div>
-      <h2 className="nav navbar-nav navbar-default">
-        <Link to={"/articles"} element={AllArticles}>
-          HOME
-        </Link>
-      </h2>
-      {Topics.map(({ slug }) => {
-        return (
-          <div className="navbar navbar-expand-lg navbar-light bg-light nav navbar-nav navbar-default">
-            <li key={slug} className="nav navbar-nav navbar-default">
-              <Link
-                className="nav navbar-nav navbar-default"
-                to={`/topics/${slug}`}
-              >
-                {slug}
-              </Link>
-            </li>
-          </div>
-        );
-      })}
-      <div class="control"></div>
+    <div className="container">
+      <div className="row align-items-end">
+        <div className="col">
+          <h2>
+            <Link to={"/"} element={WelcomePage}>
+              Welcome Page
+            </Link>
+          </h2>
+        </div>
+        <div className="col">
+          <h2>
+            <Link to={"/articles"} element={AllArticles}>
+              HOME
+            </Link>
+          </h2>
+        </div>
+        <div className="col">
+          {Topics.map(({ slug }) => {
+            return (
+              <span key={slug}>
+                <li className="float-end" className="slugspace" key={slug}>
+                  <Link to={`/topics/${slug}`}>{slug}</Link>
+                </li>
+              </span>
+            );
+          })}
+        </div>
+      </div>
     </div>
   );
 };

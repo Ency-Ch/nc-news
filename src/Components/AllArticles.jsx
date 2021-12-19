@@ -1,40 +1,54 @@
 import React, { useState } from "react";
 import { getAllArticles, getSortedArticles } from "../utils/api";
 import { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
-import { FormGroup, ListGroup } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { useParams } from "react-router";
 import SortArticles from "./SortArticles";
+
 const AllArticles = (props) => {
   const { topic } = useParams();
   const { SetArticles, Articles, query, setQuery } = props;
+  const [isError, setisError] = useState(false);
 
   useEffect(() => {
-    console.log(query);
+    if (query === "") {
+      return;
+    }
     if (query !== "" || query !== null || query !== undefined) {
       getSortedArticles(query).then((response) => {
         SetArticles(response);
-        console.log(Articles, query, "articles");
       });
     }
-  }, [query]);
+  }, [query, SetArticles]);
 
   useEffect(() => {
-    if (query === "" || query === null || query !== undefined) {
-      getAllArticles(topic).then((response) => {
+    getAllArticles(topic)
+      .then((response) => {
         SetArticles(response);
+      })
+      .catch((err) => {
+        setisError(true);
       });
-    }
-  }, [topic]);
+  }, [topic, SetArticles]);
+
+  useEffect(() => {});
+
+  if (isError) {
+    return <p>articles or topics or query are not found</p>;
+  }
 
   return (
     <div>
+      <SortArticles setQuery={setQuery} />
       <h1> Articles</h1>
       {Articles.map(({ title, article_id }) => {
         return (
-          <div className="span">
+          <div className="span" key={article_id}>
             <div className="ul">
               <li key={article_id}>
-                <Link to={`/articles/${article_id}`}>{title}</Link>
+                <Link key={article_id} to={`/articles/${article_id}`}>
+                  {title}
+                </Link>
               </li>
             </div>
           </div>

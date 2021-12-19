@@ -6,6 +6,7 @@ const ArticleVoter = (props) => {
   const { article_id, setVotes } = props;
   const [counter, setCounter] = useState(0);
   const [decreaseCounter, setDecreaseCounter] = useState(0);
+
   const OnclickIncreaseVotes = () => {
     if (counter === 0) {
       setCounter(1);

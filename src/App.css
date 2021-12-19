@@ -19,3 +19,27 @@
 li {
   list-style-type: none;
 }
+#QueryError {
+  color: red;
+}
+
+#welcomePage {
+  color: cornflowerblue;
+  animation: run 9s;
+}
+
+@keyframes run {
+  from {
+    opacity: 0;
+    transform: translateY(-10);
+  }
+
+  to {
+    opacity: 2;
+    transform: translateY(0);
+  }
+}
+
+.comment-analytic {
+  color: cornflowerblue;
+}

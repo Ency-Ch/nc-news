@@ -8,7 +8,7 @@ import Comments from "./Components/Comments";
 import React from "react";
 import { useState } from "react";
 import SingleUser from "./Components/SingleUser";
-import SortArticles from "./Components/SortArticles";
+import WelcomePage from "./Components/WelcomePage";
 
 function App() {
   const [Articles, SetArticles] = useState([]);
@@ -22,8 +22,8 @@ function App() {
         <Header />
         <Navbar Topics={Topics} SetTopics={SetTopics} query={query} />
         <SingleUser />
-        <SortArticles setQuery={setQuery} />
         <Routes>
+          <Route path="/" element={<WelcomePage />} />
           <Route
             path="/articles/:article_id"
             element={
@@ -55,22 +55,13 @@ function App() {
             }
           />
           <Route
-            path="/articles?=query"
-            element={
-              <AllArticles
-                Articles={Articles}
-                SetArticles={SetArticles}
-                query={query}
-              />
-            }
-          />
-          <Route
             path="/topics/:topic"
             element={
               <AllArticles
                 Articles={Articles}
                 SetArticles={SetArticles}
                 query={query}
+                setQuery={setQuery}
               />
             }
           />

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getSingleUser } from "../utils/api";
-import { useParams } from "react-router-dom";
+
 import React from "react";
 
 const SingleUser = () => {
