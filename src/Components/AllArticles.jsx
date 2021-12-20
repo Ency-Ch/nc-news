@@ -9,6 +9,7 @@ const AllArticles = (props) => {
   const { topic } = useParams();
   const { SetArticles, Articles, query, setQuery } = props;
   const [isError, setisError] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (query === "") {
@@ -17,6 +18,7 @@ const AllArticles = (props) => {
     if (query !== "" || query !== null || query !== undefined) {
       getSortedArticles(query).then((response) => {
         SetArticles(response);
+        setLoading(false);
       });
     }
   }, [query, SetArticles]);
@@ -25,18 +27,24 @@ const AllArticles = (props) => {
     getAllArticles(topic)
       .then((response) => {
         SetArticles(response);
+        setLoading(false);
       })
       .catch((err) => {
         setisError(true);
       });
   }, [topic, SetArticles]);
 
-  useEffect(() => {});
-
   if (isError) {
-    return <p>articles or topics or query are not found</p>;
+    return (
+      <p className="articles-error">
+        articles or topics or query are not found
+      </p>
+    );
   }
 
+  if (loading) {
+    return <p>Articles Loading</p>;
+  }
   return (
     <div>
       <SortArticles setQuery={setQuery} />

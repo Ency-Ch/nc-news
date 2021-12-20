@@ -1,14 +1,16 @@
 import React from "react";
 import { pickSelectedValueFromRadioButton } from "../utils/api";
+import { useNavigate } from "react-router";
 
 const SortArticles = (props) => {
   const { setQuery } = props;
+  const navigate = useNavigate();
 
   return (
     <div className="hide-sorting-item">
       <div class="container">
         <div class="row">
-          <div className="sortAlArticles">
+          <div className="sortAllArticles">
             <h5>Sort all articles by </h5>{" "}
           </div>
           <p id="QueryError"></p>
@@ -45,10 +47,11 @@ const SortArticles = (props) => {
                     let thequery = pickSelectedValueFromRadioButton();
                     if (thequery === undefined) {
                       document.getElementById("QueryError").innerHTML =
-                        "invalid query please refresh page and try again";
+                        "invalid query please pick an option and  try again";
                     } else {
                       document.getElementById("QueryError").innerHTML = "";
                       setQuery(thequery);
+                      navigate(`/articles?sort_by=${thequery}`);
                     }
                   }}
                 >

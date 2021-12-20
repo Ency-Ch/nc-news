@@ -2,7 +2,7 @@ import React from "react";
 import AllArticles from "./AllArticles";
 import { Link } from "react-router-dom";
 
-const WelcomePage = () => {
+const WelcomePage = (props) => {
   return (
     <div>
       <h1 id="welcomePage">Welcome to the best news site on earth</h1>
@@ -12,7 +12,7 @@ const WelcomePage = () => {
           HOME
         </Link>{" "}
         <br />
-        for all the latest articles in cooking, coding, football
+        for all the latest articles
       </h4>
     </div>
   );

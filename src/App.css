@@ -22,6 +22,9 @@ li {
 #QueryError {
   color: red;
 }
+.articles-error {
+  color: red;
+}
 
 #welcomePage {
   color: cornflowerblue;

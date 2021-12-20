@@ -24,7 +24,11 @@ const AnArticle = (props) => {
   }, [article_id]);
 
   if (isError) {
-    return <p>article_id not found</p>;
+    return (
+      <p className="articles-error">
+        article_id not found refresh and try again
+      </p>
+    );
   }
 
   return (

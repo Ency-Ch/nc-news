@@ -132,3 +132,13 @@ export const pickSelectedValueFromRadioButton = () => {
     }
   }
 };
+
+export const unpickSelectedValueFromRadioButton = () => {
+  let ele = document.getElementsByName("answer");
+
+  for (let i = 0; i < ele.length; i++) {
+    if (ele[i].checked) {
+      return (ele[i].checked = false);
+    }
+  }
+};

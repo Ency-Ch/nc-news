@@ -52,7 +52,6 @@ const Comments = (props) => {
     console.log(order_by);
     getAnArticleSortedComments(article_id, order_by)
       .then((response) => {
-        console.log(response);
         setCommentsAll(response);
       })
       .catch((err) => {

@@ -23,7 +23,16 @@ function App() {
         <Navbar Topics={Topics} SetTopics={SetTopics} query={query} />
         <SingleUser />
         <Routes>
-          <Route path="/" element={<WelcomePage />} />
+          <Route
+            path="/"
+            element={
+              <WelcomePage
+                Topics={Topics}
+                SetTopics={SetTopics}
+                query={query}
+              />
+            }
+          />
           <Route
             path="/articles/:article_id"
             element={
@@ -45,6 +54,28 @@ function App() {
           <Route path="/comments/:comment_id" />
           <Route
             path="/articles"
+            element={
+              <AllArticles
+                Articles={Articles}
+                SetArticles={SetArticles}
+                query={query}
+                setQuery={setQuery}
+              />
+            }
+          />
+          <Route
+            path="/articles?sort_by=votes"
+            element={
+              <AllArticles
+                Articles={Articles}
+                SetArticles={SetArticles}
+                query={query}
+                setQuery={setQuery}
+              />
+            }
+          />
+          <Route
+            path="/articles?sort_by=created_at"
             element={
               <AllArticles
                 Articles={Articles}
