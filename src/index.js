@@ -6,7 +6,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <div className="container mt-2 rounded">
+      {" "}
+      <App />{" "}
+    </div>
   </React.StrictMode>,
   document.getElementById("root")
 );

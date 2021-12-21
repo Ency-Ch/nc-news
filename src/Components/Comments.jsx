@@ -73,6 +73,7 @@ const Comments = (props) => {
         <h2>new comment</h2>
         <label htmlFor="new-comment"></label>
         <textarea
+          className="container"
           type="text"
           id="new-comment"
           onChange={(e) => {
@@ -81,7 +82,7 @@ const Comments = (props) => {
           }}
           value={newComment}
           required
-          className="mt-0 text-center "
+          // className="mt-0 text-center "
           placeholder="Enter a comment here "
         ></textarea>
         <li>

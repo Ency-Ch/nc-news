@@ -1,5 +1,8 @@
 import React from "react";
-import { pickSelectedValueFromRadioButton } from "../utils/api";
+import {
+  pickSelectedValueFromRadioButton,
+  unpickSelectedValueFromRadioButton,
+} from "../utils/api";
 import { useNavigate } from "react-router";
 
 const SortArticles = (props) => {
@@ -52,6 +55,7 @@ const SortArticles = (props) => {
                       document.getElementById("QueryError").innerHTML = "";
                       setQuery(thequery);
                       navigate(`/articles?sort_by=${thequery}`);
+                      unpickSelectedValueFromRadioButton();
                     }
                   }}
                 >
