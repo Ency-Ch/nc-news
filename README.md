@@ -22,9 +22,12 @@ git clone https://github.com/Ency-Ch/nc-news
 Change directory to the project folder:
 
 cd nc-news
+
+
 Install dependencies:
 
 npm i
+
 In the project directory, you can run:
 
 npm start
