@@ -1,6 +1,6 @@
 # nc-news
 
-this nc-news, 
+this  is nc-news, 
 a front end project done using react.js. Users of the website can view all the articles on the website at once or can filter articles based on topics.
 additionally users can sort articles according to date created (default) and number of votes.
 
