@@ -1,9 +1,14 @@
 # nc-news
 
-this nc-news, a front end project done using react.js. Users of the website can view all the articles on the website at once or can filter articles based on topics.
-additional users can sort articles according to date created (default) and number of votes.There is a functionality to vote for articles
-a logged in user can also add and delete comments ( a user has already been hard-coded for ease of use and to demonstrate the app capabilities) 
+this nc-news, 
+a front end project done using react.js. Users of the website can view all the articles on the website at once or can filter articles based on topics.
+additionally users can sort articles according to date created (default) and number of votes.
+
+There is a functionality to vote for articles
+A logged in user can also add and delete comments ( a user has already been hard-coded for ease of use and to demonstrate the app capabilities) 
+
 Bootstrapp has been used for a minimal and clean UI.
+
 the backend utilises postgres, express.js and SQL
 
 the link to the backend [Link to backend] https://github.com/Ency-Ch/be-nc-news-example
