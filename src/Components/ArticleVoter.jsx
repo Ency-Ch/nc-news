@@ -45,7 +45,7 @@ const ArticleVoter = (props) => {
         onClick={OnclickdecreaseVotes}
       >
         {" "}
-        Down Votes{" "}
+        Down Vote{" "}
       </button>
     </div>
   );
