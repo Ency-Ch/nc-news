@@ -1,6 +1,6 @@
 # nc-news
 
-this  is nc-news, 
+this  is nc-news,its hosted on nelify https://ency-ch.netlify.app/
 a front end project done using react.js. Users of the website can view all the articles on the website at once or can filter articles based on topics.
 additionally users can sort articles according to date created (default) and number of votes.
 
@@ -11,7 +11,7 @@ Bootstrapp has been used for a minimal and clean UI.
 
 the backend utilises postgres, express.js and SQL
 
-the link to the backend [Link to backend] https://github.com/Ency-Ch/be-nc-news-example
+the link to the backend  https://github.com/Ency-Ch/be-nc-news-example
 
 Pre requisites
 Node.js is required as the runtime environment for the project. [Link to node]https://nodejs.org/en/download/ .
